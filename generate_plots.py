@@ -66,3 +66,38 @@ def plot_scatter(sensor_a, sensor_b, timestamps, ax):
     ax.set_title('Sensor Temperature Readings Over Time')
     ax.legend()
     ax.grid(True, alpha=0.3)
+
+
+# Create plot_histogram(sensor_a, sensor_b, ax) that draws
+# the overlaid histogram from the notebook onto the given Axes object.
+# NumPy-style docstring. Modifies ax in place, returns None.
+
+def plot_histogram(sensor_a, sensor_b, ax):
+    """Create an overlaid histogram of sensor temperature distributions.
+
+    Parameters
+    ----------
+    sensor_a : array_like, shape (n,)
+        Temperature readings from Sensor A in degrees Celsius.
+    sensor_b : array_like, shape (n,)
+        Temperature readings from Sensor B in degrees Celsius.
+    ax : matplotlib.axes.Axes
+        The Axes object on which to draw the histogram.
+
+    Returns
+    -------
+    None
+        Modifies the input Axes object in place.
+    """
+    ax.hist(sensor_a, bins=30, alpha=0.5, color='blue', label='Sensor A', edgecolor='black', linewidth=0.5)
+    ax.hist(sensor_b, bins=30, alpha=0.5, color='orange', label='Sensor B', edgecolor='black', linewidth=0.5)
+
+    # Add vertical lines at the means
+    ax.axvline(np.mean(sensor_a), color='blue', linestyle='--', linewidth=2, label=f'Sensor A mean: {np.mean(sensor_a):.1f}°C')
+    ax.axvline(np.mean(sensor_b), color='orange', linestyle='--', linewidth=2, label=f'Sensor B mean: {np.mean(sensor_b):.1f}°C')
+
+    ax.set_xlabel('Temperature (°C)')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Temperature Distribution Comparison')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
